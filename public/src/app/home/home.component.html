@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row col-md-10 col-md-offset-1">
+    <div *ngIf="message != null" class="alert alert-success">
+      <strong>{{message}}</strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class=" well col-md-6 col-md-offset-3">
+      <div class="row">
+        <a class="col-md-6 col-md-offset-3 btn btn-primary" [routerLink]="['/','play']">Play a Game</a>
+      </div>
+      <div class="row">
+        <h3 class="col-md-6 col-md-offset-3 text-primary">Click the button above to start the trivia game</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-10 col-md-offset-1">
+      <div class="row">
+    <label class="col-md-12">
+      <strong class="pull-left">Search:</strong>
+      <input class="col-md-6" type="text" (keyup)="search()" [(ngModel)]="key_word">
+    </label>
+      </div>
+    <div class="row col-md-offset-1">
+    <ul class="pagination">
+      <li *ngFor="let n of list; let i = index">
+        <a class='btn btn-primary' (click)="update(i)">{{i+1}}</a>
+      </li>
+    </ul>
+  </div>
+  </div>
+
+  <div class="row col-md-10 col-md-offset-1">
+    <table class="table table-bordered table-striped table-responsive">
+      <thead>
+        <tr class="info">
+          <th>Name</th>
+          <th>Score</th>
+          <th>Percentage</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of all_results">
+          <td>{{result.name}}</td>
+          <td>{{result.score}}/4</td>
+          <td>{{result.percentage * 100 + "%"}}</td>
+          <td>{{result.createdAt |date : "medium" }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

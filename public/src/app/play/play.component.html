@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="row">
+      <h3><strong>Hi, {{user.first_name}} {{user.last_name}}</strong></h3>
+      <p>Choose an answer for each of questions and submit the test once done.</p>
+      <p>Good Luck!</p>
+    </div>
+
+    <div class="row question">
+      <form (submit)="onSubmit()" #playform="ngForm">
+        <div class="well" *ngFor="let question of questions; let i = index" >
+          <h3>{{i +1}}. {{question.content}}</h3>
+          <div class="radio" *ngFor="let answer of random_answers[i]" >
+              <label>
+                  <input type="radio" name="group{{i}}" [(ngModel)]="submit_answers[i].answer" required value="{{answer}}">{{answer}}</label>
+          </div>
+        </div>
+        <div class="row col-md-3 col-md-offset-3">
+          <input class="btn btn-primary" type="submit"  [disabled]="!playform.valid" value="Submit">
+        </div>
+      </form>
+      <button class="btn btn-danger col-md-offset-2" (click)="cancel()">Cancel</button>
+      <!-- {{submit_answers[0]| json}}
+      {{submit_answers[1]| json}}
+      {{submit_answers[2]| json}}
+      {{submit_answers[3]| json}} -->
+    </div>
+
+  </div>
+</div>

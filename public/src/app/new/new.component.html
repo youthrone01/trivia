@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Horizontal form</h1>
+
+    <form class="form-horizontal"(submit)='create()' #questionform = 'ngForm' >
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="content">Question:</label>
+        <div class="col-sm-10">
+          <textarea rows="5" cols="10" class="form-control" id="content"
+           placeholder="Enter question" name="content"
+           [(ngModel)] ="new_question.content" required minlength="15"
+           #content = 'ngModel'
+           ></textarea>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="content.errors && content.dirty">  
+          <p *ngIf="content.errors.required"><strong>Warning!</strong> Question field is equired</p>
+          <p *ngIf="content.errors.minlength"><strong>Warning!</strong> Question field should have minimum 15 characters</p>   
+       </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="answer">Correct Answer:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="answer"
+           placeholder="Enter Answer" name="answer"
+           [(ngModel)] ="new_question.answer" required
+           #answer = 'ngModel'>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="answer.errors && answer.dirty">  
+          <p *ngIf="answer.errors.required"><strong>Warning!</strong> Answer field is equired</p>   
+       </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="fake_one">Fake Answer 1:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="fake_one"
+           placeholder="Enter Answer" name="fake_one"
+           [(ngModel)] ="new_question.fake_one" required
+           #fake_one = 'ngModel'>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="fake_one.errors && fake_one.dirty">  
+          <p *ngIf="fake_one.errors.required"><strong>Warning!</strong> Fake Answer 1 is equired</p>   
+       </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="fake_two">Fake Answer 2:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="fake_two"
+           placeholder="Enter Answer" name="fake_two"
+           [(ngModel)] ="new_question.fake_two" required
+           #fake_two = 'ngModel'>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="fake_two.errors && fake_two.dirty">  
+          <p *ngIf="fake_two.errors.required"><strong>Warning!</strong> Fake Answer 2 is equired</p>   
+       </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="fake_three">Fake Answer 3:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="fake_three"
+           placeholder="Enter Answer" name="fake_three"
+           [(ngModel)] ="new_question.fake_three" required
+           #fake_three = 'ngModel'>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="fake_three.errors && fake_three.dirty">  
+          <p *ngIf="fake_three.errors.required"><strong>Warning!</strong> Fake Answer 3 is equired</p>   
+       </div>
+       
+      <div class="col-md-6 col-md-offset-3">
+      <button type="submit" class="btn btn-primary"[disabled]="!questionform.valid" >Add A Question</button>
+    </div>
+    </form>
+    <button (click)='cancel()' class="btn btn-danger">Cancel</button>
+  </div>
+  <div class="row"></div>
+</div>

@@ -1,0 +1,116 @@
+<div class="container">
+    
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+  <div class="panel panel-login">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-6">
+          <a href="#" class="active" id="login-form-link">Login</a>
+        </div>
+        <div class="col-xs-6">
+          <a href="#" id="register-form-link">Register</a>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <form (submit)='login()' #loginform = "ngForm" id="login-form" role="form" style="display: block;">
+              <div class="alert alert-warning" *ngIf="error_message.login" >
+                  <strong>{{error_message.login}}</strong>
+                </div>
+            <div class="form-group">
+              <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address"
+              [(ngModel)] = 'login_user.email' #login_email = "ngModel" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})">
+            </div>
+            <div class="alert alert-danger" *ngIf="login_email.errors && login_email.dirty">  
+                <p *ngIf="login_email.errors.required"><strong>Warning!</strong> Email field is equired</p>
+                <p *ngIf="login_email.errors.pattern"><strong>Warning!</strong> Email format is incorrect</p>   
+             </div>
+
+            <div class="form-group">
+              <input type="password" name="lg_password" id="lg_password" tabindex="2" class="form-control" placeholder="Password"
+              [(ngModel)]="login_user.password" required minlength="9" #lg_password="ngModel">
+            </div>
+            <div class="alert alert-danger" *ngIf="lg_password.errors && lg_password.dirty">  
+                <p *ngIf="lg_password.errors.required"><strong>Warning!</strong> Password field is equired</p>
+                <p *ngIf="lg_password.errors.minlength"><strong>Warning!</strong> Password field should have minimum 9 characters</p>   
+             </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In"
+                  [disabled]="!loginform.valid">
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <form name="form" (submit)='create()' #registerform = "ngForm" id="register-form" role="form" style="display: none;">
+              <div class="alert alert-warning" *ngIf="error_message.register">
+                  <strong>{{error_message.register}}</strong>
+                </div>
+            <div class="form-group">
+                <input type="text" name="first" id="first" tabindex="1" class="form-control" placeholder="First Name"
+                [(ngModel)] = 'new_user.first_name' #first_name = "ngModel" required minlength="2" >
+            </div>
+            <div class="alert alert-danger" *ngIf="first_name.errors && first_name.dirty">  
+                <p *ngIf="first_name.errors.required"><strong>Warning!</strong> First Name is equired</p>
+                <p *ngIf="first_name.errors.minlength"><strong>Warning!</strong> First Name should have minimum 2 characters</p>   
+             </div>
+            
+            <div class="form-group">
+              <input type="text" name="last" id="last" tabindex="1" class="form-control" placeholder="Last Name" 
+              [(ngModel)] = 'new_user.last_name' #last_name = "ngModel" required minlength="2">
+            </div>
+            <div class="alert alert-danger" *ngIf="last_name.errors && last_name.dirty">  
+                <p *ngIf="last_name.errors.required"><strong>Warning!</strong> Last Name is equired</p>
+                <p *ngIf="last_name.errors.minlength"><strong>Warning!</strong> Last Name should have minimum 2 characters</p>   
+             </div>
+
+            <div class="form-group">
+              <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" 
+              [(ngModel)] = 'new_user.email' #email = "ngModel" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})">
+            </div>
+            <div class="alert alert-danger" *ngIf="email.errors && email.dirty">  
+                <p *ngIf="email.errors.required"><strong>Warning!</strong> Email is equired</p>
+                <p *ngIf="email.errors.pattern"><strong>Warning!</strong> Email format is incorrect</p>   
+             </div>
+
+            <div class="form-group">
+              <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"
+              [(ngModel)]="new_user.password" required minlength="9" #password="ngModel">
+            </div>
+            <div class="alert alert-danger" *ngIf="password.errors && password.dirty">  
+                <p *ngIf="password.errors.required"><strong>Warning!</strong> Password is equired</p>
+                <p *ngIf="password.errors.minlength"><strong>Warning!</strong> Password should have minimum 9 characters</p>   
+             </div>
+
+            <div class="form-group">
+              <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password"
+              [(ngModel)]="pass_confirm" required #pw_confirm="ngModel" pattern="{{new_user.password}}">
+            </div>
+            <div class="alert alert-danger" *ngIf="pw_confirm.errors && pw_confirm.dirty">  
+                <p *ngIf="pw_confirm.errors.required"><strong>Warning!</strong> Password confirmation is equired</p>
+                <p *ngIf="pw_confirm.errors.pattern"><strong>Warning!</strong> Password confirmation is not matched</p>   
+             </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now"
+                  [disabled]="!registerform.valid">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+    <nav class="navbar bg-primary text-white">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['/','home']">Trivia</a>
+          </div>
+          <div *ngIf="if_login_one || if_login_two">
+          <ul class="nav navbar-nav">
+            <li class="active"><a class="btn btn-primary" [routerLink]="['/','home']">Home</a></li>
+            <li><a class="btn btn-primary" [routerLink]="['/','new']">Add a Question</a></li>
+            <li><a class="btn btn-primary" [routerLink]="['/','play']">Play a Game</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="btn btn-primary" (click)='logout()' >Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+          </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+<router-outlet></router-outlet>
