@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var Question = mongoose.model("Question");
 var Result = mongoose.model("Result");
+var request = require('request');
+var cheerio = require('cheerio');
 
 module.exports = {
 	create: function(req,res){
@@ -28,12 +30,43 @@ module.exports = {
 					   questions[i] = itemAtIndex;
 				   }
 				var  ques = questions.slice(0,4);
-				console.log(ques);
+				
 				res.json(ques);
 			}
 		})
 	},
-	destroy: function(req,res){
+	get_online_questions: function(req, res){
+		var res_questions = [];
+		var page_num = Math.floor(Math.random()*20+1)
+		var page = ""+page_num
+		if (page.length < 2){
+			page = "0"+page
+		}
+		console.log(page)
+		var url = 'http://global.oup.com/uk/orc/sociology/fulcher4e/01student/mcqs/ch'+page
+		request(url, function(err, response, html){
+			if (err){
+				console.log('err')
+			}else{
+				var $ = cheerio.load(html);
+				$('#mcqs').filter(function(){
+					var data = $(this);
+					data.children('div').each(function(i, elem){
+						var dic = {};
+						dic.content = $(this).children('p').text()
+						dic.answer = $(this).children('div').eq(0).find("label").clone().children().remove().end().text();
+						dic.fake_one =  $(this).children('div').eq(1).find("label").clone().children().remove().end().text();
+						dic.fake_two =  $(this).children('div').eq(2).find("label").clone().children().remove().end().text();
+						dic.fake_three =  $(this).children('div').eq(3).find("label").clone().children().remove().end().text();
+						res_questions.push(dic);
+					})
+					console.log(res_questions)
+					res.json(res_questions);
+				})
+			}
+		})
 		
 	},
+
+
 }

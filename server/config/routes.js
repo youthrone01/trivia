@@ -11,6 +11,7 @@ module.exports = function(app){
 	app.post('/results', (req,res)=>{results.create(req,res)});
 	app.get('/results', (req,res)=>{results.get_results(req,res)});
 	app.post('/results/search', (req,res)=>{results.search(req,res)});
+	app.get('/oxford', (req,res)=>{questions.get_online_questions(req,res)} )
 	
 	app.all("*",function(req,res){
 		res.sendFile('index.html', { root: './public/dist' });

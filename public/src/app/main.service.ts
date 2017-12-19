@@ -114,4 +114,15 @@ is_login: BehaviorSubject<any[]> = new BehaviorSubject([])
     )
   };
 
+  get_online_questions(callback){
+    this._http.get('/oxford').subscribe(
+      (res)=>{
+        console.log('success 8');
+        callback(res.json());
+      },
+      (error)=>{
+        console.log("error 8");
+      }
+    )
+  }
 }

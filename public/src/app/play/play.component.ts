@@ -14,7 +14,7 @@ export class PlayComponent implements OnInit {
   } ;
   questions=[];
   random_answers=[];
-  
+  online_question_set = [];
   submit_answers = [
     {answer:""},
     {answer:""},
@@ -25,6 +25,7 @@ export class PlayComponent implements OnInit {
   constructor(private _mainService: MainService, private _router: Router) { }
   
   make_random_answer(question){
+    this.random_answers = [];
     for(var i =0; i < question.length; i++){
       var arr = []
       arr.push(question[i].answer);
@@ -82,6 +83,19 @@ export class PlayComponent implements OnInit {
         }
     }
     })
+  };
+
+  getQuestions(){
+    this.questions = [];
+    for (var i = this.online_question_set.length-1; i >=0; i--) {
+      
+         var randomIndex = Math.floor(Math.random()*(i+1)); 
+         var itemAtIndex = this.online_question_set[randomIndex];						
+         this.online_question_set[randomIndex] = this.online_question_set[i]; 
+         this.online_question_set[i] = itemAtIndex;
+       }
+    this.questions = this.online_question_set.slice(0,4);
+    this.make_random_answer(this.questions);
   }
   
   ngOnInit(){
@@ -93,6 +107,11 @@ export class PlayComponent implements OnInit {
       this._mainService.get_questions((res)=>{
         this.questions = res;
         this.make_random_answer(this.questions);
+      });
+
+      this._mainService.get_online_questions((res)=>{
+        this.online_question_set = res;
+        console.log(this.online_question_set);
       })
     }
   }

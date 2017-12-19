@@ -4,7 +4,8 @@
       <h3><strong>Hi, {{user.first_name}} {{user.last_name}}</strong></h3>
       <p>Choose an answer for each of questions and submit the test once done.</p>
       <p>Good Luck!</p>
-    </div>
+      <button class="btn btn-primary" (click)="getQuestions()" >Try questions from Oxford University Press</button>
+    </div><br>
 
     <div class="row question">
       <form (submit)="onSubmit()" #playform="ngForm">

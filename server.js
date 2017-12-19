@@ -4,6 +4,11 @@ var path = require("path");
 var app = express();
 var bodyParser = require("body-parser");
 var session = require('express-session');
+var request = require('request');
+var cheerio = require('cheerio');
+var Browser = require("zombie");
+var assert = require("assert");
+
 app.listen(8000, function() {
  console.log("listening on port 8000");
 });
